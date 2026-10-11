@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Remove the `setMode` helper; its four call sites now call `update($, view, ...)` directly. The directory's analyzer reported exactly those calls (`MOD_CAPABILITY_USE_NOT_PLAIN`) and no other use of `$`.
+
 ## 0.1.1
 
 - Make `setMode` an `async` function that awaits its update, so the directory's analyzer can follow every `$` use (it reported `MOD_CAPABILITY_USE_NOT_PLAIN` at its call sites).

@@ -9,7 +9,7 @@
 import { atom, read, update } from 'claude-code'
 import type { EngineInterface, Register, RenderElement, RenderInput, ToolCallInput, ToolCallResult } from 'claude-code'
 
-import type { ReplayMode, ReplayStep } from '../types'
+import type { ReplayStep } from '../types'
 import { ADD, DEL, PX_PER_CELL, frames, iconSvg, plural, stripSvg, summarize } from './art.ts'
 import { MAX_DIFF_LINES, makeStep, patchLines, relPath } from './diff.ts'
 import type { Hunk } from './diff.ts'
@@ -27,10 +27,6 @@ const index = atom({ plugin: 'edit-replay', key: 'index' } as const, 0)
 const view = atom({ plugin: 'edit-replay', key: 'view' } as const, { mode: 'closed', isHintHidden: false })
 
 type ReplaySite = RenderInput<'Pane'> | RenderInput<'AbovePrompt'>
-
-async function setMode($: EngineInterface, mode: ReplayMode): Promise<void> {
-  await update($, view, v => ({ ...v, mode }))
-}
 
 // What the Edit and Write tools answer with, as far as a step needs it: the
 // patch they made, whether a new file was created, and whether the write was
@@ -77,7 +73,7 @@ async function openReplay($: EngineInterface, dockable: boolean | undefined): Pr
   // The pane only takes the keyboard while nothing else holds it. Showing the
   // replay hides the band (which held the keys if its button was pressed);
   // give it a moment to go, then open.
-  await setMode($, 'pane')
+  await update($, view, v => ({ ...v, mode: 'pane' as const }))
   await $.clock.sleep(200)
   let isPlaced = false
   try {
@@ -94,13 +90,13 @@ async function openReplay($: EngineInterface, dockable: boolean | undefined): Pr
   }
   // No room for a pane (a narrow terminal, a surface that places none): the
   // band above the prompt draws the replay instead.
-  if (!isPlaced) await setMode($, 'band')
+  if (!isPlaced) await update($, view, v => ({ ...v, mode: 'band' as const }))
   return true
 }
 
 async function closeReplay($: EngineInterface): Promise<void> {
   const { mode } = await read($, view)
-  await setMode($, 'closed')
+  await update($, view, v => ({ ...v, mode: 'closed' as const }))
   if (mode === 'pane') await $.ui.close({ id: PANE_ID })
 }
 
@@ -403,7 +399,7 @@ export function register(on: Parameters<Register>[0]): void {
   // The person closed the pane (Escape, the close mark): keep the flag in step.
   on('ui.close', async ($, e, next) => {
     const r = await next(e)
-    if (e.id === PANE_ID) await setMode($, 'closed')
+    if (e.id === PANE_ID) await update($, view, v => ({ ...v, mode: 'closed' as const }))
     return r
   })
 }
