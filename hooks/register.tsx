@@ -28,8 +28,8 @@ const view = atom({ plugin: 'edit-replay', key: 'view' } as const, { mode: 'clos
 
 type ReplaySite = RenderInput<'Pane'> | RenderInput<'AbovePrompt'>
 
-function setMode($: EngineInterface, mode: ReplayMode) {
-  return update($, view, v => ({ ...v, mode }))
+async function setMode($: EngineInterface, mode: ReplayMode): Promise<void> {
+  await update($, view, v => ({ ...v, mode }))
 }
 
 // What the Edit and Write tools answer with, as far as a step needs it: the
