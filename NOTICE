@@ -1,0 +1,17 @@
+Edit Replay
+Copyright 2026 Feida Wang
+
+This product is derived from the `replay-theater` sample mod in
+https://github.com/anthropics/claude-code-playground (claude-code/mods/replay-theater),
+Copyright Anthropic, PBC, licensed under the Apache License, Version 2.0.
+
+Changes made by Feida Wang: renamed to Edit Replay; ported to the Claude Code
+2.1.286 mods API (all drawing state lives in `$.state`, with a typed contract);
+rewrote the diff recorder to read the tools' structured patches (hooks/diff.ts),
+the film-strip hint band and its SVG art (hooks/art.ts), the /replay pane and
+band fallback; made the hint band stack with other plugins' bands through
+`next(e)`; added tests that run on both the terminal and desktop surfaces,
+documentation, a listing icon, and packaging for the Claude plugin directory.
+
+Edit Replay is an independent project. It is not an Anthropic product and is
+not endorsed by Anthropic.

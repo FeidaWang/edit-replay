@@ -1,0 +1,12 @@
+{
+  "name": "edit-replay",
+  "description": "Edit Replay: step through the file edits from the last turn",
+  "owner": { "name": "Feida Wang", "email": "founder@rsiagent.app" },
+  "plugins": [
+    {
+      "name": "edit-replay",
+      "source": "./",
+      "description": "Step through the file edits Claude made in the last turn, one diff at a time, in a pane or right above the prompt"
+    }
+  ]
+}

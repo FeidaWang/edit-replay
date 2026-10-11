@@ -1,0 +1,19 @@
+{
+  "name": "edit-replay",
+  "displayName": "Edit Replay",
+  "version": "0.1.0",
+  "description": "Step through the file edits Claude made in the last turn, one diff at a time, in a pane or right above the prompt",
+  "author": {
+    "name": "Feida Wang",
+    "email": "founder@rsiagent.app",
+    "url": "https://github.com/FeidaWang"
+  },
+  "homepage": "https://github.com/FeidaWang/edit-replay",
+  "repository": "https://github.com/FeidaWang/edit-replay",
+  "license": "Apache-2.0",
+  "keywords": ["diff", "replay", "edits", "review", "changes", "mod"],
+  "types": "./types/index.d.ts",
+  "privacyPolicyUrl": "https://github.com/FeidaWang/edit-replay/blob/main/PRIVACY.md",
+  "supportUrl": "https://github.com/FeidaWang/edit-replay/issues",
+  "documentationUrl": "https://github.com/FeidaWang/edit-replay#readme"
+}

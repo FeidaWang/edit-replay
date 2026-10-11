@@ -1,0 +1,9 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+__MACOSX/
+node_modules/
+*.log
+*.zip
+# Claude Code writes the mod types here each time it loads the mod.
+.claude-plugin/types/
